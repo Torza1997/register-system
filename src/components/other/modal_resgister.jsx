@@ -15,7 +15,16 @@ export default function ModalResgister(data) {
     const phone = useRef(null);
 
     const UpdateUserInfo = () => {
-        console.log(firstName.current.value, lastName.current.value, phone.current.value);
+        setUser({
+            id: getUser.length + 1,
+            firstName: firstName.current.value,
+            lastName: lastName.current.value,
+            phone: phone.current.value,
+            chairNo: null
+        });
+        setTimeout(() => {
+            setOpen(false);
+        }, 300);
     }
     return (
         <Transition.Root show={open} as={Fragment}>

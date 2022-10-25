@@ -1,13 +1,9 @@
 import { useState } from 'react';
 import { Table, Input, InputGroup } from 'rsuite';
 import SearchIcon from '@rsuite/icons/Search';
-// import { UseGlobalContext } from "../contexts/GlobalContext";
+import { UseGlobalContext } from "../contexts/GlobalContext";
 const { LayoutDefault } = require('../layouts/default');
 const { Column, HeaderCell, Cell } = Table;
-const data = [
-    { id: 1, firstName: "tor", lastName: "thanatos", phone: "0613041105", chairNo: "10" },
-    { id: 2, firstName: "tor2", lastName: "thanatos2", phone: "0613041105", chairNo: "ยังไม่มีเก้าอี้" }
-]
 const checkImg = require('../assets/images/man2.png');
 const styles = {
     marginBottom: 10
@@ -22,18 +18,31 @@ const CustomInputGroup = ({ placeholder, ...props }) => (
 );
 
 export const Dashboard = () => {
-    // const { text, newText } = UseGlobalContext();
-    // const changText = () => {
-    //     newText.SetText('mother father');
-    // }
+    const { user, chair, updateChair } = UseGlobalContext();
 
     const [sortColumn, setSortColumn] = useState();
     const [sortType, setSortType] = useState();
     const [loading, setLoading] = useState(false);
+    const [chairNo, setChairNo] = useState(null);
 
+
+    const refreshTable = () => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 300);
+    }
+    const testOncheng = (e) => {
+        const value = e.target.value;
+        setChairNo(value === "" ? null : parseInt(value));
+    }
+    const confirmChairNo = (userId) => {
+        updateChair(chairNo, userId);
+        refreshTable();
+    }
     const getData = () => {
         if (sortColumn && sortType) {
-            return data.sort((a, b) => {
+            return user.getUser.sort((a, b) => {
                 let x = a[sortColumn];
                 let y = b[sortColumn];
                 if (typeof x === 'string') {
@@ -49,7 +58,7 @@ export const Dashboard = () => {
                 }
             });
         }
-        return data;
+        return user.getUser;
     };
 
     const handleSortColumn = (sortColumn, sortType) => {
@@ -80,8 +89,6 @@ export const Dashboard = () => {
                         </div>
                     </div>
                     <Table
-                        // height={420}
-                        // width={1070}
                         data={getData()}
                         sortColumn={sortColumn}
                         sortType={sortType}
@@ -109,19 +116,41 @@ export const Dashboard = () => {
                         </Column>
                         <Column width={200} sortable>
                             <HeaderCell>เก้าอี้เบอร์ที่</HeaderCell>
-                            <Cell dataKey="chairNo" />
+                            <Cell>
+                                {rowData => (
+                                    <span> {rowData.chairNo === null ? `ยังไม่มีเก้าอี้` : rowData.chairNo}</span>
+                                )}
+                            </Cell>
                         </Column>
-                        <Column width={200}>
+                        <Column width={210}>
                             <HeaderCell>เลือกที่นั่ง</HeaderCell>
                             <Cell>
                                 {rowData => (
-                                    <button className='bg-green-500 text-white p-2 py-1 rounded-xl' appearance="ghost" onClick={() => alert(`id:${rowData.id}`)}> เพิ่มที่นั่ง </button>
+                                    <select onChange={testOncheng}>
+                                        <option value="">select chair</option>
+                                        {
+                                            chair.map((item) => (!item.active ? <option key={item.ChairNo} value={item.ChairNo}>{item.ChairNo}</option> : null))
+                                        }
+                                    </select>
+                                )}
+                            </Cell>
+                        </Column>
+                        <Column width={80}>
+                            <HeaderCell>action</HeaderCell>
+                            <Cell>
+                                {rowData => (
+                                    <button
+                                        className='bg-green-500 text-white p-2 py-1 rounded-xl'
+                                        appearance="ghost"
+                                        onClick={() => confirmChairNo(rowData.id)}>
+                                        นั่งยัน
+                                    </button>
                                 )}
                             </Cell>
                         </Column>
                     </Table>
                 </div>
             </div>
-        </LayoutDefault>
+        </LayoutDefault >
     );
 };

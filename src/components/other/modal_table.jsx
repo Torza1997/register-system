@@ -1,18 +1,21 @@
 import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+// import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import { UseGlobalContext } from "../../contexts/GlobalContext";
 import { Table } from 'rsuite';
 
 const { Column, HeaderCell, Cell } = Table;
 const checkImg = require('../../assets/images/man.png');
-const dataMock = [
-    { id: 1, firstName: "tor", lastName: "thanatos", phone: "0613041105", chairNo: "10" },
-    { id: 2, firstName: "tor2", lastName: "thanatos2", phone: "0613041105", chairNo: "ยังไม่มีเก้าอี้" }
-]
+// const dataMock = [
+//     { id: 1, firstName: "tor", lastName: "thanatos", phone: "0613041105", chairNo: "10" },
+//     { id: 2, firstName: "tor2", lastName: "thanatos2", phone: "0613041105", chairNo: "ยังไม่มีเก้าอี้" }
+// ]
 export default function ModalTable(data) {
     // const [open, setOpen] = useState(false)
     const { open2, setOpen2 } = data.openUp;
     const cancelButtonRef = useRef(null);
+    const { getUser } = UseGlobalContext().user;
+
 
     const [sortColumn, setSortColumn] = useState();
     const [sortType, setSortType] = useState();
@@ -20,7 +23,7 @@ export default function ModalTable(data) {
 
     const getData = () => {
         if (sortColumn && sortType) {
-            return dataMock.sort((a, b) => {
+            return getUser.sort((a, b) => {
                 let x = a[sortColumn];
                 let y = b[sortColumn];
                 if (typeof x === 'string') {
@@ -36,7 +39,7 @@ export default function ModalTable(data) {
                 }
             });
         }
-        return dataMock;
+        return getUser;
     };
 
     const handleSortColumn = (sortColumn, sortType) => {
@@ -116,7 +119,11 @@ export default function ModalTable(data) {
                                                     </Column>
                                                     <Column width={130} sortable>
                                                         <HeaderCell>เก้าอี้เบอร์ที่</HeaderCell>
-                                                        <Cell dataKey="chairNo" />
+                                                        <Cell>
+                                                            {rowData => (
+                                                                <span> {rowData.chairNo === null ? `ยังไม่มีเก้าอี้` : rowData.chairNo}</span>
+                                                            )}
+                                                        </Cell>
                                                     </Column>
                                                 </Table>
                                             </div>

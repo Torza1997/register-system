@@ -29,7 +29,7 @@ export const MainComponent = () => {
             {/* show the chair */}
             <div className="grid grid-cols-2 lg:grid-cols-8 md:grid-cols-6 sm:grid-cols-4 w-full gap-2 justify-items-center p-5 md:p-10 md:px-40">
                 {chair.map((chair) => {
-                    return <Chair key={chair.ChairNo} numberOfChair={chair.ChairNo} />
+                    return <Chair key={chair.ChairNo} numberOfChair={chair.ChairNo} active={chair.active} />
                 })}
             </div >
             {/* button */}

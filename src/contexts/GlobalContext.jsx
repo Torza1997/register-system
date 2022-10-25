@@ -10,7 +10,8 @@ const Mutichair = () => {
     const maxChair = 56;
     for (let index = 0; index < maxChair; index++) {
         ObjChair.push({
-            ChairNo: index,
+            ChairNo: (index + 1),
+            userID: null,
             active: false
         });
     }
@@ -19,16 +20,46 @@ const Mutichair = () => {
 
 function GlobalContextComp({ children }) {
     const [uesr, setUser] = useState([]);
-    function SetUser(userInfo) {
+    const [chair, setChair] = useState(Mutichair());
+
+    function SetUserInfo(userInfo) {
         setUser((prevUserInfo) => [
             ...prevUserInfo,
             userInfo
         ]);
     }
+    function UpdateChair(chairNo, userId) {
+        console.log(userId, chairNo);
+        const arrIndex = chairNo - 1;
+        const arrUserIndex = userId - 1;
+
+        setUser((userInfo) => {
+            if (userInfo[arrUserIndex].chairNo !== null) {
+                //คืนเก้าอี้
+                setChair((chairInfo) => {
+                    const ChairNo = userInfo[arrUserIndex].chairNo - 1;
+                    chairInfo[ChairNo].active = false;
+                    chairInfo[ChairNo].userID = null;
+                    return chairInfo;
+                });
+                userInfo[arrUserIndex].chairNo = chairNo;
+            } else {
+                userInfo[arrUserIndex].chairNo = chairNo;
+            }
+            return userInfo;
+        })
+        // set active chair
+        setChair((chairInfo) => {
+            chairInfo[arrIndex].active = true;
+            chairInfo[arrIndex].userID = userId;
+            return chairInfo;
+        })
+    }
     const data = {
-        chair: Mutichair(),
+        chair: chair,
+        updateChair: UpdateChair,
         user: {
-            setUser: SetUser,
+            setUser: SetUserInfo,
             getUser: uesr
         }
 
