@@ -20,7 +20,10 @@ const Mutichair = () => {
 function GlobalContextComp({ children }) {
     const [uesr, setUser] = useState([]);
     function SetUser(userInfo) {
-        setUser(userInfo);
+        setUser((prevUserInfo) => [
+            ...prevUserInfo,
+            userInfo
+        ]);
     }
     const data = {
         chair: Mutichair(),

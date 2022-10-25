@@ -1,12 +1,22 @@
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+// import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import { UseGlobalContext } from "../../contexts/GlobalContext";
+
 const checkImg = require('../../assets/images/note.png');
 
 export default function ModalResgister(data) {
-    // const [open, setOpen] = useState(false)
+    const { getUser, setUser } = UseGlobalContext().user;
     const { open, setOpen } = data.openUp;
-    const cancelButtonRef = useRef(null)
+    const cancelButtonRef = useRef(null);
+
+    const firstName = useRef(null);
+    const lastName = useRef(null);
+    const phone = useRef(null);
+
+    const UpdateUserInfo = () => {
+        console.log(firstName.current.value, lastName.current.value, phone.current.value);
+    }
     return (
         <Transition.Root show={open} as={Fragment}>
             <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen} style={{ "fontFamily": 'IBM Plex Sans Thai Medium' }} >
@@ -51,15 +61,15 @@ export default function ModalResgister(data) {
                                             <div className="mt-4">
                                                 <div className='flex flex-col'>
                                                     <label className='mr-2'>ชื่อ: </label>
-                                                    <input type="text" className="form-input px-4 py-3 rounded-xl bg-gray-300 mb-2" />
+                                                    <input ref={firstName} type="text" className="form-input px-4 py-3 rounded-xl bg-gray-300 mb-2" />
                                                 </div>
                                                 <div className='flex flex-col'>
                                                     <label className='mr-2'>นามสกุล: </label>
-                                                    <input type="text" className="form-input px-4 py-3 rounded-xl bg-gray-300 mb-2" />
+                                                    <input ref={lastName} type="text" className="form-input px-4 py-3 rounded-xl bg-gray-300 mb-2" />
                                                 </div>
                                                 <div className='flex flex-col'>
                                                     <label className='mr-2'>เบอร์โทร: </label>
-                                                    <input type="tel" className="form-input px-4 py-3 rounded-xl bg-gray-300 mb-2" />
+                                                    <input ref={phone} type="tel" className="form-input px-4 py-3 rounded-xl bg-gray-300 mb-2" />
                                                 </div>
                                             </div>
                                         </div>
@@ -70,7 +80,7 @@ export default function ModalResgister(data) {
                                     <button
                                         type="button"
                                         className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                                        onClick={() => setOpen(false)}
+                                        onClick={UpdateUserInfo}
                                     >
                                         ลงทะเบียน
                                     </button>
