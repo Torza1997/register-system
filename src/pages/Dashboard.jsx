@@ -37,8 +37,10 @@ export const Dashboard = () => {
         setChairNo(value === "" ? null : parseInt(value));
     }
     const confirmChairNo = (userId) => {
-        updateChair(chairNo, userId);
-        refreshTable();
+        if (chairNo !== null) {
+            updateChair(chairNo, userId);
+            refreshTable();
+        }
     }
     const getData = () => {
         if (sortColumn && sortType) {
