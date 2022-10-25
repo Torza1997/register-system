@@ -8,7 +8,7 @@ const regisImg = require('../../assets/images/register.png');
 const regisImg2 = require('../../assets/images/customer.png');
 
 export const MainComponent = () => {
-    const { chair } = UseGlobalContext();
+    const { chair, user } = UseGlobalContext();
     const [open, setOpen] = useState(false);
     const [open2, setOpen2] = useState(false);
     return (
@@ -16,14 +16,18 @@ export const MainComponent = () => {
             <ModalResgister openUp={{ open, setOpen }} />
             <ModalTable openUp={{ open2, setOpen2 }} />
             {/* card show the rest of chair  */}
-            <div className="card-show-people  sm:px-10  sm:pt-10  flex justify-center content-center" >
-                <div className="bg-white w-80 h-28 rounded-xl m-5 flex flex-col justify-center border-4 border-black">
+            <div className="card-show-people  sm:px-10  sm:pt-10 flex flex-col sm:flex-row justify-center" >
+                <div className="bg-white sm:w-80 h-28 w-60 rounded-xl m-5 flex flex-col justify-center border-4 border-black self-center">
                     <p>จำนวนเก้าอี้ทั้งหมด</p>
                     <h1>{chair.length}</h1>
                 </div>
-                <div className="bg-white w-80 h-28 rounded-xl  m-5 flex flex-col justify-center border-4 border-black">
+                <div className="bg-white sm:w-80 h-28 w-60 rounded-xl  m-5 flex flex-col justify-center border-4 border-black self-center">
                     <p>จำนวนเก้าอี้ที่เหลือ</p>
-                    <h1>{chair.length}</h1>
+                    <h1>{chair.filter(item => item.active === false).length}</h1>
+                </div>
+                <div className="bg-white sm:w-80 h-28 w-60 rounded-xl  m-5 flex flex-col justify-center border-4 border-black self-center">
+                    <p>จำนวนคนเข้างาน</p>
+                    <h1>{user.getUser.length}</h1>
                 </div>
             </div>
             {/* show the chair */}
