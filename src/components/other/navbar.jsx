@@ -6,7 +6,7 @@ const Logo = require('../../assets/images/id-card.png');
 
 const navigation = [
     { name: 'หน้าแรก', href: '/', current: true },
-    { name: 'แดชบอร์ด', href: '/dashboard', current: false },
+    { name: 'แดชบอร์ด', href: '/dashboard', current: true },
 ]
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')

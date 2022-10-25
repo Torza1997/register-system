@@ -63,7 +63,7 @@ export default function ModalTable(data) {
                 </Transition.Child>
 
                 <div className="fixed inset-0 z-10 overflow-y-auto">
-                    <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                    <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
                         <Transition.Child
                             as={Fragment}
                             enter="ease-out duration-300"
@@ -73,7 +73,7 @@ export default function ModalTable(data) {
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
-                            <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-4/5 sm:w-3/5">
+                            <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-11/12 md:w-9/12 lg:w-7/12">
                                 {/* body */}
                                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                     {/* <div className="sm:flex sm:items-start"> */}
@@ -96,12 +96,12 @@ export default function ModalTable(data) {
                                                     onSortColumn={handleSortColumn}
                                                     loading={loading}
                                                 >
-                                                    <Column width={70} align="center" fixed sortable>
+                                                    <Column width={70} align="center" sortable>
                                                         <HeaderCell>Id</HeaderCell>
                                                         <Cell dataKey="id" />
                                                     </Column>
 
-                                                    <Column width={130} fixed sortable>
+                                                    <Column width={130} sortable>
                                                         <HeaderCell>ชื่อ</HeaderCell>
                                                         <Cell dataKey="firstName" />
                                                     </Column>

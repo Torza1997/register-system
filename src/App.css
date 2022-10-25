@@ -1,5 +1,6 @@
 @import url('./assets/fonts/IBMPlexSansThai/stylesheet.css');
 @import url('rsuite/dist/rsuite.min.css');
+
 .App {
   text-align: center;
   font-family: 'IBM Plex Sans Thai Medium' !important;
@@ -8,6 +9,11 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.rs-table {
+  border-radius: 15px;
+  background: white;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -39,4 +45,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+a {
+  text-decoration: none !important;
+  cursor: pointer;
 }
