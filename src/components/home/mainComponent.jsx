@@ -1,31 +1,16 @@
-// import { UserContextComp } from "../../contexts/Home";
 import { useState } from "react";
 import Chair from "../other/chair";
 import ModalResgister from "../other/modal_resgister";
 import ModalTable from "../other/modal_table";
+import { UseGlobalContext } from "../../contexts/GlobalContext";
 
 const regisImg = require('../../assets/images/register.png');
 const regisImg2 = require('../../assets/images/customer.png');
 
-const Mutichair = () => {
-    const ObjChair = []
-    const maxChair = 56;
-    for (let index = 0; index < maxChair; index++) {
-        ObjChair.push({
-            ChairNo: index,
-            active: false
-        });
-    }
-    return ObjChair;
-}
 export const MainComponent = () => {
-    // const { text, newText } = UserContextComp();
-    // const changText = () => {
-    //     newText.SetText('mother father');
-    // }
+    const { chair } = UseGlobalContext();
     const [open, setOpen] = useState(false);
     const [open2, setOpen2] = useState(false);
-
     return (
         <div className="grid grid-cols-1">
             <ModalResgister openUp={{ open, setOpen }} />
@@ -34,16 +19,16 @@ export const MainComponent = () => {
             <div className="card-show-people  sm:px-10  sm:pt-10  flex justify-center content-center" >
                 <div className="bg-white w-80 h-28 rounded-xl m-5 flex flex-col justify-center border-4 border-black">
                     <p>จำนวนเก้าอี้ทั้งหมด</p>
-                    <h1>{Mutichair().length}</h1>
+                    <h1>{chair.length}</h1>
                 </div>
                 <div className="bg-white w-80 h-28 rounded-xl  m-5 flex flex-col justify-center border-4 border-black">
                     <p>จำนวนเก้าอี้ที่เหลือ</p>
-                    <h1>{Mutichair().length}</h1>
+                    <h1>{chair.length}</h1>
                 </div>
             </div>
             {/* show the chair */}
             <div className="grid grid-cols-2 lg:grid-cols-8 md:grid-cols-6 sm:grid-cols-4 w-full gap-2 justify-items-center p-5 md:p-10 md:px-40">
-                {Mutichair().map((chair) => {
+                {chair.map((chair) => {
                     return <Chair key={chair.ChairNo} numberOfChair={chair.ChairNo} />
                 })}
             </div >

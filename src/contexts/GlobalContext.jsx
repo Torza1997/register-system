@@ -4,16 +4,31 @@ const GlobalContext = createContext();
 function UseGlobalContext() {
     return useContext(GlobalContext);
 }
+
+const Mutichair = () => {
+    const ObjChair = []
+    const maxChair = 56;
+    for (let index = 0; index < maxChair; index++) {
+        ObjChair.push({
+            ChairNo: index,
+            active: false
+        });
+    }
+    return ObjChair;
+}
+
 function GlobalContextComp({ children }) {
-    const [text, setText] = useState('tor thanatos');
-    function SetText(textInput) {
-        setText(textInput);
+    const [uesr, setUser] = useState([]);
+    function SetUser(userInfo) {
+        setUser(userInfo);
     }
     const data = {
-        text: text,
-        newText: {
-            SetText
+        chair: Mutichair(),
+        user: {
+            setUser: SetUser,
+            getUser: uesr
         }
+
     }
     return (
         <div>
