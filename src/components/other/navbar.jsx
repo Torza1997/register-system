@@ -1,9 +1,11 @@
-import { Fragment } from 'react'
+// import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-const defaultAvatar = require('../../assets/images/man.png');
-const Logo = require('../../assets/images/id-card.png');
+import { Link } from "react-router-dom";
 
+
+// const defaultAvatar = require('../../assets/images/man.png');
+const Logo = require('../../assets/images/id-card.png');
 const navigation = [
     { name: 'หน้าแรก', href: '/', current: true },
     { name: 'แดชบอร์ด', href: '/dashboard', current: true },
@@ -45,9 +47,9 @@ export function Navabar() {
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-4">
                                         {navigation.map((item) => (
-                                            <a
+                                            <Link
                                                 key={item.name}
-                                                href={item.href}
+                                                to={item.href}
                                                 className={classNames(
                                                     item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                                     'px-3 py-2 rounded-md text-sm font-medium'
@@ -55,7 +57,7 @@ export function Navabar() {
                                                 aria-current={item.current ? 'page' : undefined}
                                             >
                                                 {item.name}
-                                            </a>
+                                            </Link>
                                         ))}
                                     </div>
                                 </div>
@@ -113,8 +115,8 @@ export function Navabar() {
                             {navigation.map((item) => (
                                 <Disclosure.Button
                                     key={item.name}
-                                    as="a"
-                                    href={item.href}
+                                    as="Link"
+                                    to={item.href}
                                     className={classNames(
                                         item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                         'block px-3 py-2 rounded-md text-base font-medium'

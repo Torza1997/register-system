@@ -5,13 +5,17 @@ import { Routes, Route } from "react-router-dom";
 // component
 const { Home } = require('./pages/Home.jsx');
 const { Dashboard } = require('./pages/Dashboard.jsx');
+const { GlobalContextComp } = require('./contexts/GlobalContext');
+
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
+      <GlobalContextComp>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </GlobalContextComp>
     </div >
   );
 }

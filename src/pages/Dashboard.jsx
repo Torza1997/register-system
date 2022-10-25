@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Table, Input, InputGroup, Dropdown } from 'rsuite';
+import { Table, Input, InputGroup, Button } from 'rsuite';
 import SearchIcon from '@rsuite/icons/Search';
+// import { UseGlobalContext } from "../contexts/GlobalContext";
 
 const { Navabar } = require('../components/other/navbar');
 const { Column, HeaderCell, Cell } = Table;
@@ -22,6 +23,11 @@ const CustomInputGroup = ({ placeholder, ...props }) => (
 );
 
 export const Dashboard = () => {
+    // const { text, newText } = UseGlobalContext();
+    // const changText = () => {
+    //     newText.SetText('mother father');
+    // }
+
     const [sortColumn, setSortColumn] = useState();
     const [sortType, setSortType] = useState();
     const [loading, setLoading] = useState(false);
@@ -110,18 +116,7 @@ export const Dashboard = () => {
                         <HeaderCell>เลือกที่นั่ง</HeaderCell>
                         <Cell>
                             {rowData => (
-                                <div>
-                                    <a onClick={() => alert(`id:${rowData.id}`)}> เพิ่มที่นั่ง </a>
-                                    {/* <Dropdown title="Dropdown">
-                                        <Dropdown.Item>New File</Dropdown.Item>
-                                        <Dropdown.Item>New File with Current Profile</Dropdown.Item>
-                                        <Dropdown.Item>Download As...</Dropdown.Item>
-                                        <Dropdown.Item>Export PDF</Dropdown.Item>
-                                        <Dropdown.Item>Export HTML</Dropdown.Item>
-                                        <Dropdown.Item>Settings</Dropdown.Item>
-                                        <Dropdown.Item>About</Dropdown.Item>
-                                    </Dropdown> */}
-                                </div>
+                                <button className='bg-green-500 text-white p-2 py-1 rounded-xl' appearance="ghost" onClick={() => alert(`id:${rowData.id}`)}> เพิ่มที่นั่ง </button>
                             )}
                         </Cell>
                     </Column>
