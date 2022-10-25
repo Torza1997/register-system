@@ -51,15 +51,15 @@ export default function ModalResgister(data) {
                                             <div className="mt-4">
                                                 <div className='flex flex-col'>
                                                     <label className='mr-2'>ชื่อ: </label>
-                                                    <input type="text" class="form-input px-4 py-3 rounded-xl bg-gray-300 mb-2" />
+                                                    <input type="text" className="form-input px-4 py-3 rounded-xl bg-gray-300 mb-2" />
                                                 </div>
                                                 <div className='flex flex-col'>
                                                     <label className='mr-2'>นามสกุล: </label>
-                                                    <input type="text" class="form-input px-4 py-3 rounded-xl bg-gray-300 mb-2" />
+                                                    <input type="text" className="form-input px-4 py-3 rounded-xl bg-gray-300 mb-2" />
                                                 </div>
                                                 <div className='flex flex-col'>
                                                     <label className='mr-2'>เบอร์โทร: </label>
-                                                    <input type="tel" class="form-input px-4 py-3 rounded-xl bg-gray-300 mb-2" />
+                                                    <input type="tel" className="form-input px-4 py-3 rounded-xl bg-gray-300 mb-2" />
                                                 </div>
                                             </div>
                                         </div>

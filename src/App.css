@@ -1,5 +1,5 @@
 @import url('./assets/fonts/IBMPlexSansThai/stylesheet.css');
-
+@import url('rsuite/dist/rsuite.min.css');
 .App {
   text-align: center;
   font-family: 'IBM Plex Sans Thai Medium' !important;

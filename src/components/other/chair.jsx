@@ -10,13 +10,13 @@ const ChairRed = ({ num, setCheck }) => {
         setCheck(true);
     }
     return <div className="flex content-center justify-center " onClick={checkFunc} >
-        <h1 className='absolute text-3xl text-white'>{num + 1}</h1>
+        <p className='absolute text-2xl text-white'>{num + 1}</p>
         <img className="w-24" src={chair} alt="" srcSet="" />
     </div>
 }
 const ChairGray = ({ num }) => {
     return <div className="flex content-center justify-center " >
-        <h1 className='absolute text-3xl text-white'>{num + 1}</h1>
+        <p className='absolute text-2xl text-white'>{num + 1}</p>
         <img className="w-24" src={chair2} alt="" srcSet="" />
     </div>
 }

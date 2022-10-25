@@ -5,8 +5,8 @@ const defaultAvatar = require('../../assets/images/man.png');
 const Logo = require('../../assets/images/id-card.png');
 
 const navigation = [
-    { name: 'Home', href: '/', current: true },
-    { name: 'Dashboard', href: '/dashboard', current: false },
+    { name: 'หน้าแรก', href: '/', current: true },
+    { name: 'แดชบอร์ด', href: '/dashboard', current: false },
 ]
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
