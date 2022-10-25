@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 const defaultAvatar = require('../../assets/images/man.png');
-const Logo = require('../../assets/images/edit.png');
+const Logo = require('../../assets/images/id-card.png');
 
 const navigation = [
     { name: 'Home', href: '/', current: true },
@@ -13,7 +13,7 @@ function classNames(...classes) {
 }
 export function Navabar() {
     return (
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-gray-800 sticky top-0 z-10">
             {({ open }) => (
                 <>
                     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
