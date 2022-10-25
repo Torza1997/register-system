@@ -80,7 +80,7 @@ export const Dashboard = () => {
                         <div className="grid grid-cols-1 mb-4 ">
                             <div className='grid justify-items-center'>
                                 <img className='mb-3  w-24' src={checkImg} alt="" srcSet="" />
-                                <h1 className='justify-items-start ml-3 text-white'>รายชื่อคนเข้างานทั้งหมด</h1>
+                                <p className='justify-items-start ml-3 text-white sm:text-5xl text-3xl'>รายชื่อคนเข้างานทั้งหมด</p>
                             </div>
                         </div>
 
@@ -91,6 +91,7 @@ export const Dashboard = () => {
                         </div>
                     </div>
                     <Table
+                        height={420}
                         data={getData()}
                         sortColumn={sortColumn}
                         sortType={sortType}
