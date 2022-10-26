@@ -79,11 +79,26 @@ export const Dashboard = () => {
                     <div>
                         <div className="grid grid-cols-1 mb-4 ">
                             <div className='grid justify-items-center'>
-                                <img className='mb-3  w-24' src={checkImg} alt="" srcSet="" />
+                                <img className='mb-5  w-24' src={checkImg} alt="" srcSet="" />
                                 <p className='justify-items-start ml-3 text-white sm:text-5xl text-3xl'>รายชื่อคนเข้างานทั้งหมด</p>
+
+                                <div className="grid md:grid-cols-3 sm:grid-cols-2 justify-items-center gap-x-1" >
+                                    <div className="bg-white md:w-44 h-28 w-60 rounded-xl m-5 flex flex-col justify-center border-4 border-black self-center">
+                                        <p>จำนวนเก้าอี้ทั้งหมด</p>
+                                        <h1>{chair.length}</h1>
+                                    </div>
+                                    <div className="bg-white md:w-44 h-28 w-60 rounded-xl  m-5 flex flex-col justify-center border-4 border-black self-center">
+                                        <p>จำนวนเก้าอี้ที่เหลือ</p>
+                                        <h1>{chair.filter(item => item.active === false).length}</h1>
+                                    </div>
+                                    <div className="bg-white md:w-44 h-28 w-60 rounded-xl  m-5 flex flex-col justify-center border-4 border-black self-center">
+                                        <p>จำนวนคนเข้างาน</p>
+                                        <h1>{user.getUser.length}</h1>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-
                     </div>
                     <div className='grid justify-items-center mb-4'>
                         <div className='w-full sm:w-80'>

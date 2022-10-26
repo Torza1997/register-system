@@ -6,25 +6,52 @@ import { UseGlobalContext } from "../../contexts/GlobalContext";
 const checkImg = require('../../assets/images/note.png');
 
 export default function ModalResgister(data) {
-    const { getUser, setUser } = UseGlobalContext().user;
+    const { user, chair } = UseGlobalContext();
+    const { getUser, setUser } = user;
     const { open, setOpen } = data.openUp;
     const cancelButtonRef = useRef(null);
 
     const firstName = useRef(null);
     const lastName = useRef(null);
     const phone = useRef(null);
-
+    const InCase = [
+        "",
+        null,
+        undefined
+    ]
     const UpdateUserInfo = () => {
-        setUser({
-            id: getUser.length + 1,
-            firstName: firstName.current.value,
-            lastName: lastName.current.value,
-            phone: phone.current.value,
-            chairNo: null
-        });
-        setTimeout(() => {
-            setOpen(false);
-        }, 300);
+        if (!InCase.includes(firstName.current?.value)) {
+            setUser({
+                id: getUser.length + 1,
+                firstName: firstName.current.value,
+                lastName: lastName.current.value,
+                phone: phone.current.value,
+                chairNo: null
+            });
+            setTimeout(() => {
+                setOpen(false);
+            }, 300);
+        }
+    }
+    const UelectComp = () => {
+        return chair.filter(item => item.active === false).length !== 0 ? (
+            <div className="mt-4">
+                <div className='flex flex-col'>
+                    <label className='mr-2'>ชื่อ: </label>
+                    <input ref={firstName} type="text" className="form-input px-4 py-3 rounded-xl bg-gray-300 mb-2" />
+                </div>
+                <div className='flex flex-col'>
+                    <label className='mr-2'>นามสกุล: </label>
+                    <input ref={lastName} type="text" className="form-input px-4 py-3 rounded-xl bg-gray-300 mb-2" />
+                </div>
+                <div className='flex flex-col'>
+                    <label className='mr-2'>เบอร์โทร: </label>
+                    <input ref={phone} type="tel" className="form-input px-4 py-3 rounded-xl bg-gray-300 mb-2" />
+                </div>
+            </div>
+        ) : (
+            <h3 className='mt-5'>ที่นั้งเต็มแล้ว</h3>
+        )
     }
     return (
         <Transition.Root show={open} as={Fragment}>
@@ -66,21 +93,7 @@ export default function ModalResgister(data) {
                                                     ลงทะเบียนเข้างาน
                                                 </Dialog.Title>
                                             </div>
-
-                                            <div className="mt-4">
-                                                <div className='flex flex-col'>
-                                                    <label className='mr-2'>ชื่อ: </label>
-                                                    <input ref={firstName} type="text" className="form-input px-4 py-3 rounded-xl bg-gray-300 mb-2" />
-                                                </div>
-                                                <div className='flex flex-col'>
-                                                    <label className='mr-2'>นามสกุล: </label>
-                                                    <input ref={lastName} type="text" className="form-input px-4 py-3 rounded-xl bg-gray-300 mb-2" />
-                                                </div>
-                                                <div className='flex flex-col'>
-                                                    <label className='mr-2'>เบอร์โทร: </label>
-                                                    <input ref={phone} type="tel" className="form-input px-4 py-3 rounded-xl bg-gray-300 mb-2" />
-                                                </div>
-                                            </div>
+                                            <UelectComp />
                                         </div>
                                     </div>
                                 </div>
