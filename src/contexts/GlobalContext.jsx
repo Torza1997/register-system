@@ -50,6 +50,10 @@ function GlobalContextComp({ children }) {
         }
     }
 
+    function findUser(ChairNo) {
+        return user.filter((item) => item.chairNo === ChairNo);
+    }
+
     function UpdateChair(chairNo, userId) {
         const arrIndex = chairNo - 1;
         const arrUserIndex = userId - 1;
@@ -81,6 +85,7 @@ function GlobalContextComp({ children }) {
         chair: chair,
         updateChair: UpdateChair,
         dataFilter: dataFilter,
+        findUser: findUser,
         funcFiltter: Filtter,
         user: {
             setUser: SetUserInfo,
