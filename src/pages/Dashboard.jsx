@@ -18,13 +18,12 @@ const CustomInputGroup = ({ placeholder, ...props }) => (
 );
 
 export const Dashboard = () => {
-    const { user, chair, updateChair } = UseGlobalContext();
+    const { user, chair, updateChair, dataFilter, funcFiltter } = UseGlobalContext();
 
     const [sortColumn, setSortColumn] = useState();
     const [sortType, setSortType] = useState();
     const [loading, setLoading] = useState(false);
     const [chairNo, setChairNo] = useState(null);
-
 
     const refreshTable = () => {
         setLoading(true);
@@ -42,9 +41,14 @@ export const Dashboard = () => {
             refreshTable();
         }
     }
+    const searchData = (e) => {
+        funcFiltter(e.target.value);
+        refreshTable();
+    }
     const getData = () => {
+        const data = dataFilter ? dataFilter : user.getUser;
         if (sortColumn && sortType) {
-            return user.getUser.sort((a, b) => {
+            return data.sort((a, b) => {
                 let x = a[sortColumn];
                 let y = b[sortColumn];
                 if (typeof x === 'string') {
@@ -60,7 +64,7 @@ export const Dashboard = () => {
                 }
             });
         }
-        return user.getUser;
+        return data;
     };
 
     const handleSortColumn = (sortColumn, sortType) => {
@@ -71,7 +75,6 @@ export const Dashboard = () => {
             setSortType(sortType);
         }, 500);
     };
-
     return (
         <LayoutDefault>
             <div className='min-h-screen  bg-gray-900 ' >
@@ -96,13 +99,12 @@ export const Dashboard = () => {
                                         <h1>{user.getUser.length}</h1>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                     <div className='grid justify-items-center mb-4'>
                         <div className='w-full sm:w-80'>
-                            <CustomInputGroup size="lg" placeholder="search" />
+                            <CustomInputGroup onChange={searchData} size="lg" placeholder="search" />
                         </div>
                     </div>
                     <Table

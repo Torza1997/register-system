@@ -17,10 +17,15 @@ const Mutichair = () => {
     }
     return ObjChair;
 }
-
+const InCase = [
+    "",
+    null,
+    undefined
+]
 function GlobalContextComp({ children }) {
-    const [uesr, setUser] = useState([]);
+    const [user, setUser] = useState([]);
     const [chair, setChair] = useState(Mutichair());
+    const [dataFilter, setDataFilter] = useState(null);
     // const [theRestChair, setTheRestChair] = useState(0);
 
     function SetUserInfo(userInfo) {
@@ -29,11 +34,25 @@ function GlobalContextComp({ children }) {
             userInfo
         ]);
     }
+
+    function Filtter(searchValue) {
+        if (!InCase.includes(searchValue)) {
+            const found = user.filter(
+                (item) =>
+                    item.id === searchValue ||
+                    item.firstName === searchValue ||
+                    item.lastName === searchValue ||
+                    item.phone === searchValue
+            )
+            setDataFilter(found);
+        } else {
+            setDataFilter(user);
+        }
+    }
+
     function UpdateChair(chairNo, userId) {
-        console.log(userId, chairNo);
         const arrIndex = chairNo - 1;
         const arrUserIndex = userId - 1;
-
         setUser((userInfo) => {
             if (userInfo[arrUserIndex].chairNo !== null) {
                 //คืนเก้าอี้
@@ -56,12 +75,16 @@ function GlobalContextComp({ children }) {
             return chairInfo;
         })
     }
+
+    // data output
     const data = {
         chair: chair,
         updateChair: UpdateChair,
+        dataFilter: dataFilter,
+        funcFiltter: Filtter,
         user: {
             setUser: SetUserInfo,
-            getUser: uesr
+            getUser: user
         }
 
     }
